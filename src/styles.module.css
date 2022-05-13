@@ -1,0 +1,13 @@
+/* add css module styles here (optional) */
+
+.StickerFaceFrame {
+  position: absolute;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.2);
+}
+
+.StickerFaceContainer {
+  display: inline-block;
+  position: relative;
+}
