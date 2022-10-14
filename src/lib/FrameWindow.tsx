@@ -2,11 +2,11 @@ import * as React from 'react'
 // eslint-disable-next-line no-unused-vars
 import { RefObject, useEffect } from 'react'
 import { handleClickOutside } from '../hooks'
-import styles from '../styles.module.css'
+import '../styles.module.css'
 
-const WIDTH = 300
-const HEIGHT = 620
-const FRAME_SRC = 'http://localhost:3000/'
+// const WIDTH = 300
+// const HEIGHT = 620
+// const FRAME_SRC = 'http://localhost:3000/'
 
 interface IFrameWindowProps {
   layers?: string | null
@@ -14,6 +14,8 @@ interface IFrameWindowProps {
   visible: boolean
   setLoad: (loaded: boolean) => void
   frameRef: RefObject<HTMLIFrameElement>
+  className: string | undefined
+  src: string
 }
 
 export const FrameWindow: React.FC<IFrameWindowProps> = React.memo(
@@ -30,12 +32,19 @@ export const FrameWindow: React.FC<IFrameWindowProps> = React.memo(
 
     return (
       <iframe
-        className={styles.StickerFaceFrame}
-        width={WIDTH}
-        height={HEIGHT}
-        src={FRAME_SRC + (props.layers ? `?layers=${props.layers}` : '')}
+        // className={styles.StickerFaceFrame}
+        // width={WIDTH}
+        // height={HEIGHT}
+        // src={FRAME_SRC + (props.layers ? `?layers=${props.layers}` : '')}
+        className='StickerFaceFrame'
+        src={
+          props.src +
+          (props.layers
+            ? `?section=Head&excludedSections=background&layers=${props.layers}`
+            : '?excludedSections=background')
+        }
         ref={props.frameRef}
-        style={getFrameStyles()}
+        // style={getFrameStyles()}
         onLoad={() => props.setLoad(true)}
       />
     )
@@ -43,9 +52,9 @@ export const FrameWindow: React.FC<IFrameWindowProps> = React.memo(
   (prev, next) => prev.visible === next.visible
 )
 
-const getFrameStyles = () => {
-  return {
-    left: WIDTH / 4,
-    bottom: -HEIGHT / 4
-  }
-}
+// const getFrameStyles = () => {
+//   return {
+//     left: WIDTH / 4,
+//     bottom: -HEIGHT / 4
+//   }
+// }
