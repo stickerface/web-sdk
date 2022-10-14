@@ -27,7 +27,7 @@ const StickerFace: React.FC<Props> = (props) => {
     isLoaded,
     onInit: props.onInit,
     onChange: props.onChange,
-    frame: frameRef
+    frame: frameRef,
   })
 
   const handleClick = () => {
