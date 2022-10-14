@@ -12,6 +12,12 @@ interface Props {
   onChange: (layers: string) => void
 }
 
+const DEFAULT_LAYERS =
+  '1;69;159;253;250;13;160;100;3040;265;76;3000;273;3200;90;28;23;203;11;68;219;83;35;'
+
+const FRAME_ORIGIN = 'https://editor.stickerface.io'
+const FRAME_PATH = `?section=Head&excludedSections=background&layers=${DEFAULT_LAYERS}`
+
 const StickerFace: React.FC<Props> = (props) => {
   const [visible, setIsVisible] = useState<boolean>(false)
   const frameRef = useRef<HTMLIFrameElement>(null)
@@ -34,7 +40,7 @@ const StickerFace: React.FC<Props> = (props) => {
       {visible ? (
         <FrameWindow
           visible={visible}
-          layers={props.layers}
+          layers={props.layers ? FRAME_ORIGIN : FRAME_ORIGIN + FRAME_PATH}
           frameRef={frameRef}
           setLoad={(loaded) => setIsLoaded(loaded)}
           setVisible={(visible) => setIsVisible(visible)}
