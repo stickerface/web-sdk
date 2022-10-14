@@ -23,6 +23,8 @@ const StickerFace: React.FC<Props> = (props) => {
   const frameRef = useRef<HTMLIFrameElement>(null)
   const [isLoaded, setIsLoaded] = useState(false)
 
+  console.log('visible', visible)
+
   setupListeners({
     isLoaded,
     onInit: props.onInit,

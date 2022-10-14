@@ -2,7 +2,7 @@ import * as React from 'react'
 // eslint-disable-next-line no-unused-vars
 import { RefObject, useEffect } from 'react'
 import { handleClickOutside } from '../hooks'
-import '../styles.module.css'
+import styles from '../styles.module.css'
 
 // const WIDTH = 300
 // const HEIGHT = 620
@@ -32,11 +32,11 @@ export const FrameWindow: React.FC<IFrameWindowProps> = React.memo(
 
     return (
       <iframe
-        // className={styles.StickerFaceFrame}
+        className={styles.StickerFaceFrame}
         // width={WIDTH}
         // height={HEIGHT}
         // src={FRAME_SRC + (props.layers ? `?layers=${props.layers}` : '')}
-        className='StickerFaceFrame'
+        // className='StickerFaceFrame'
         src={
           props.src +
           (props.layers
