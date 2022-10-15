@@ -16,6 +16,7 @@ const App = () => {
         <StickerFace
           token={'token'}
           layers={layers}
+          className={'Help'}
           size={{
             width: '100%',
             height: '100%',

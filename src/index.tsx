@@ -4,12 +4,14 @@ import { FrameWindow } from './lib/FrameWindow'
 import { setupListeners } from './lib/setupListeners'
 import { TransportContextProvider } from './lib/Transport/Transport'
 import styles from './styles.module.css'
+import classNames from "classnames";
 
 interface Props {
   token: string
   onInit: () => void
   layers?: string | null
   onChange: (layers: string) => void
+  style?: React.CSSProperties
   className?: string
   size: {
     width: string
@@ -28,8 +30,6 @@ const StickerFace: React.FC<Props> = (props) => {
   const frameRef = useRef<HTMLIFrameElement>(null)
   const [isLoaded, setIsLoaded] = useState(false)
 
-  console.log('visible', visible)
-
   setupListeners({
     isLoaded,
     onInit: props.onInit,
@@ -42,10 +42,13 @@ const StickerFace: React.FC<Props> = (props) => {
   // }
 
   return (
-    <div className={styles.StickerFaceContainer}>
+    // margin-bottom: 12px;
+    <div
+      className={classNames(styles.StickerFaceContainer, props.className)}
+      style={props.style}
+    >
       <FrameWindow
         src={props.layers ? FRAME_ORIGIN : FRAME_ORIGIN + FRAME_PATH}
-        className={props.className}
         size={props.size}
         visible={visible}
         layers={props.layers}

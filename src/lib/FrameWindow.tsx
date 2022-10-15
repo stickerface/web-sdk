@@ -19,7 +19,6 @@ interface IFrameWindowProps {
   visible: boolean
   setLoad: (loaded: boolean) => void
   frameRef: RefObject<HTMLIFrameElement>
-  className: string | undefined
   src: string
   size: {
     width: string
