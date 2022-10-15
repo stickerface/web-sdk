@@ -4,14 +4,10 @@ import { StickerFace, TransportContextProvider } from 'stickerface-sdk'
 import 'stickerface-sdk/dist/index.css'
 
 const App = () => {
-  const [layers, setLayers] = useState<string | null>();
+  const [layers, setLayers] = useState<string | null>('1;');
 
   return (
     <div className={'container'}>
-      {/*<img*/}
-      {/*  src={`https://beta.stickerface.io/api/section/png/${layers}`}*/}
-      {/*  alt=""*/}
-      {/*/>*/}
       <TransportContextProvider>
         <StickerFace
           token={'token'}
@@ -27,6 +23,10 @@ const App = () => {
           onChange={(layers) => {
             // @ts-ignore
             setLayers(layers?.data?.data)
+          }}
+          config={{
+            selectedSections: 'Hair',
+            excludedSections: 'background'
           }}
         />
       </TransportContextProvider>

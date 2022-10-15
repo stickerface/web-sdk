@@ -4,15 +4,6 @@ import { RefObject, useEffect } from 'react'
 import { handleClickOutside } from '../hooks'
 import styles from '../styles.module.css'
 
-export interface ISizeIframe {
-  width: string
-  height: string
-}
-
-// const WIDTH = 300
-// const HEIGHT = 620
-// const FRAME_SRC = 'http://localhost:3000/'
-
 interface IFrameWindowProps {
   layers?: string | null
   setVisible: (visible: boolean) => void
@@ -24,10 +15,25 @@ interface IFrameWindowProps {
     width: string
     height: string
   }
+  config: {
+    excludedSections?: string | undefined
+    selectedSections?: string | undefined
+  }
 }
 
 export const FrameWindow: React.FC<IFrameWindowProps> = React.memo(
   (props) => {
+    const srcParams = {
+      selectedSections: props.config.selectedSections
+        ? `section=${props.config.selectedSections}`
+        : '',
+      excludedSections: props.config.excludedSections
+        ? '&excludedSections=' + props.config.excludedSections
+        : ''
+    }
+
+    console.log(srcParams)
+
     const { setVisible } = props
 
     handleClickOutside(props.frameRef, () => setVisible(false))
@@ -43,26 +49,16 @@ export const FrameWindow: React.FC<IFrameWindowProps> = React.memo(
         className={styles.StickerFaceFrame}
         width={props.size.width}
         height={props.size.height}
-        // src={FRAME_SRC + (props.layers ? `?layers=${props.layers}` : '')}
-        // className='StickerFaceFrame'
         src={
           props.src +
           (props.layers
-            ? `?section=Head&excludedSections=background&layers=${props.layers}`
-            : '?excludedSections=background')
+            ? `?${srcParams.selectedSections}${srcParams.excludedSections}&layers=${props.layers}`
+            : ``)
         }
         ref={props.frameRef}
-        // style={getFrameStyles()}
         onLoad={() => props.setLoad(true)}
       />
     )
   },
   (prev, next) => prev.visible === next.visible
 )
-
-// const getFrameStyles = () => {
-//   return {
-//     left: WIDTH / 4,
-//     bottom: -HEIGHT / 4
-//   }
-// }

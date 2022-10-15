@@ -4,9 +4,9 @@ import { FrameWindow } from './lib/FrameWindow'
 import { setupListeners } from './lib/setupListeners'
 import { TransportContextProvider } from './lib/Transport/Transport'
 import styles from './styles.module.css'
-import classNames from "classnames";
+import classNames from 'classnames'
 
-interface Props {
+interface IEditorProps {
   token: string
   onInit: () => void
   layers?: string | null
@@ -17,6 +17,10 @@ interface Props {
     width: string
     height: string
   }
+  config: {
+    excludedSections?: string | undefined
+    selectedSections?: string | undefined
+  }
 }
 
 const DEFAULT_LAYERS =
@@ -25,7 +29,7 @@ const DEFAULT_LAYERS =
 const FRAME_ORIGIN = 'https://editor.stickerface.io'
 const FRAME_PATH = `?section=Head&excludedSections=background&layers=${DEFAULT_LAYERS}`
 
-const StickerFace: React.FC<Props> = (props) => {
+const StickerFace: React.FC<IEditorProps> = (props) => {
   const [visible, setIsVisible] = useState<boolean>(false)
   const frameRef = useRef<HTMLIFrameElement>(null)
   const [isLoaded, setIsLoaded] = useState(false)
@@ -37,24 +41,20 @@ const StickerFace: React.FC<Props> = (props) => {
     frame: frameRef
   })
 
-  // const handleClick = () => {
-  //   setIsVisible(!visible)
-  // }
-
   return (
-    // margin-bottom: 12px;
     <div
       className={classNames(styles.StickerFaceContainer, props.className)}
       style={props.style}
     >
       <FrameWindow
         src={props.layers ? FRAME_ORIGIN : FRAME_ORIGIN + FRAME_PATH}
+        layers={props.layers}
         size={props.size}
         visible={visible}
-        layers={props.layers}
         frameRef={frameRef}
         setLoad={(loaded) => setIsLoaded(loaded)}
         setVisible={(visible) => setIsVisible(visible)}
+        config={props.config}
       />
     </div>
   )
