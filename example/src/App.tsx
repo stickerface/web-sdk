@@ -16,6 +16,10 @@ const App = () => {
         <StickerFace
           token={'token'}
           layers={layers}
+          size={{
+            width: '100%',
+            height: '100%',
+          }}
           onInit={() => {
             console.log('On init')
           }}

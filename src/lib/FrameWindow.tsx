@@ -4,6 +4,11 @@ import { RefObject, useEffect } from 'react'
 import { handleClickOutside } from '../hooks'
 import styles from '../styles.module.css'
 
+export interface ISizeIframe {
+  width: string
+  height: string
+}
+
 // const WIDTH = 300
 // const HEIGHT = 620
 // const FRAME_SRC = 'http://localhost:3000/'
@@ -16,6 +21,10 @@ interface IFrameWindowProps {
   frameRef: RefObject<HTMLIFrameElement>
   className: string | undefined
   src: string
+  size: {
+    width: string
+    height: string
+  }
 }
 
 export const FrameWindow: React.FC<IFrameWindowProps> = React.memo(
@@ -33,8 +42,8 @@ export const FrameWindow: React.FC<IFrameWindowProps> = React.memo(
     return (
       <iframe
         className={styles.StickerFaceFrame}
-        // width={WIDTH}
-        // height={HEIGHT}
+        width={props.size.width}
+        height={props.size.height}
         // src={FRAME_SRC + (props.layers ? `?layers=${props.layers}` : '')}
         // className='StickerFaceFrame'
         src={
