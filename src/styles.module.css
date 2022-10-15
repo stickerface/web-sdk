@@ -13,5 +13,8 @@
 
 .StickerFaceContainer {
   display: inline-block;
+  height: inherit;
+  border-radius: 16px;
+  border: none;
   /*position: relative;*/
 }
