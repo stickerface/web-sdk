@@ -1,7 +1,6 @@
 /* add css module styles here (optional) */
 
 .StickerFaceFrame {
-  position: absolute;
   border: none;
   background-color: #FFFFFF;
   border-radius: 16px;
@@ -12,9 +11,8 @@
 }
 
 .StickerFaceContainer {
-  display: inline-block;
+  position: relative;
   height: inherit;
   border-radius: 16px;
   border: none;
-  /*position: relative;*/
 }
