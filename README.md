@@ -55,7 +55,7 @@ const App = () => {
 
 export default App
 ```
-![](../../../../var/folders/r1/4wtzhb750ms0v7rf9g9b32nc0000gn/T/TemporaryItems/NSIRD_screencaptureui_jK1vxt/Screenshot 2022-10-16 at 23.24.39.png)
+![alt text](screenshots/stickerfaceEditor.png)
 
 ### Params StickerFaceEditor
 
