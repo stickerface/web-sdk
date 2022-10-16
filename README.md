@@ -82,13 +82,6 @@ interface IConfig {
 }
 ```
 
-```html
-<div id="render-canvas-container"></div>
-<div id="render-continer"></div>
-<script type="text/javascript" src="https://stickerface.io/api/init-min.js"></script>
-<script type="text/javascript" src="https://stickerface.io/js/render.js"></script>
-```
-
 ## License
 
 MIT © [Dimitreee](https://github.com/Dimitreee) | [Thepetruha](https://github.com/thepetruha)
