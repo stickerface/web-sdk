@@ -55,7 +55,6 @@ const App = () => {
 
 export default App
 ```
-![alt text](screenshots/stickerfaceEditor.png)
 
 ### Params StickerFaceEditor
 
