@@ -18,26 +18,75 @@ yarn add stickerface-sdk
 yarn add stickerface-sdk@<version>
 ```
 
-<div id="render-canvas-container"></div>
-  <div id="render-continer"></div>
-  <script type="text/javascript" src="https://stickerface.io/api/init-min.js"></script>
-  <script type="text/javascript" src="https://stickerface.io/js/render.js"></script>
-
 ## Usage
 
 ### StickerFaceEditor
 
 ```tsx
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 
-import MyComponent from 'stickerface-sdk'
+import { StickerFaceEditor, TransportContextProvider } from 'stickerface-sdk'
 import 'stickerface-sdk/dist/index.css'
 
-class Example extends Component {
-  render() {
-    return <MyComponent />
-  }
+const App = () => {
+  const [layers, setLayers] = useState<string | null>();
+
+  return (
+    <div className={'container'}>
+      <TransportContextProvider>
+        <StickerFaceEditor
+          layers={layers}
+          size={{
+            width: '100%',
+            height: '100%',
+          }}
+          onInit={() => {
+            console.log('On init')
+          }}
+          onChange={(layers) => {
+            // @ts-ignore
+            setLayers(layers?.data?.data)
+          }}
+        />
+      </TransportContextProvider>
+    </div>
+  )
 }
+
+export default App
+```
+![](../../../../var/folders/r1/4wtzhb750ms0v7rf9g9b32nc0000gn/T/TemporaryItems/NSIRD_screencaptureui_jK1vxt/Screenshot 2022-10-16 at 23.24.39.png)
+
+### Params StickerFaceEditor
+
+* layers: string | null
+* size: { width: string, height: string }
+* onInit: () => void
+```tsx
+onInit={() => {
+  console.log('On init')
+}}
+```
+* onChange: (layers: string) => void
+```tsx
+onChange={(layers) => {
+  // @ts-ignore
+  setLayers(layers?.data?.data)
+}}
+```
+* config: IConfig
+```tsx
+interface IConfig {
+  excludedSections?: string | undefined
+  selectedSections?: string | undefined
+}
+```
+
+```html
+<div id="render-canvas-container"></div>
+<div id="render-continer"></div>
+<script type="text/javascript" src="https://stickerface.io/api/init-min.js"></script>
+<script type="text/javascript" src="https://stickerface.io/js/render.js"></script>
 ```
 
 ## License
