@@ -1,18 +1,18 @@
 import React, { useState } from 'react'
 
-import { StickerFace, TransportContextProvider } from 'stickerface-sdk'
+import { StickerFaceEditor, TransportContextProvider } from 'stickerface-sdk'
 import 'stickerface-sdk/dist/index.css'
 
 const App = () => {
-  const [layers, setLayers] = useState<string | null>('1;');
+  const [layers, setLayers] = useState<string | null>();
 
   return (
     <div className={'container'}>
+      {/*<StickerFaceAvatar layer={String(layers)} noBackground={false} />*/}
       <TransportContextProvider>
-        <StickerFace
-          token={'token'}
+        <StickerFaceEditor
           layers={layers}
-          className={'Help'}
+          // className={'Help'}
           size={{
             width: '100%',
             height: '100%',

@@ -1,35 +1,17 @@
-import { useRef, useState } from 'react'
-import * as React from 'react'
-import { FrameWindow } from './lib/FrameWindow'
-import { setupListeners } from './lib/setupListeners'
-import { TransportContextProvider } from './lib/Transport/Transport'
-import styles from './styles.module.css'
-import classNames from 'classnames'
-
-interface IEditorProps {
-  token: string
-  onInit: () => void
-  layers?: string | null
-  onChange: (layers: string) => void
-  style?: React.CSSProperties
-  className?: string
-  size: {
-    width: string
-    height: string
-  }
-  config: {
-    excludedSections?: string | undefined
-    selectedSections?: string | undefined
-  }
-}
-
-const DEFAULT_LAYERS =
-  '1;69;159;253;250;13;160;100;3040;265;76;3000;273;3200;90;28;23;203;11;68;219;83;35;'
+/* eslint-disable prettier/prettier */
+import styles from "./styles.module.css";
+import * as React from "react";
+import { useRef, useState } from "react";
+import { IEditorProps } from "./types/Editor";
+import { FrameWindow } from "./lib/FrameWindow";
+import { setupListeners } from "./lib/setupListeners";
+import { TransportContextProvider } from "./lib/Transport/Transport";
+import classNames from "classnames";
+import { RENDER_EXTENSION, useRenderLayers } from "./hooks/useLayersRender";
 
 const FRAME_ORIGIN = 'https://editor.stickerface.io'
-const FRAME_PATH = `?section=Head&excludedSections=background&layers=${DEFAULT_LAYERS}`
 
-const StickerFace: React.FC<IEditorProps> = (props) => {
+const StickerFaceEditor: React.FC<IEditorProps> = (props) => {
   const [visible, setIsVisible] = useState<boolean>(false)
   const frameRef = useRef<HTMLIFrameElement>(null)
   const [isLoaded, setIsLoaded] = useState(false)
@@ -47,7 +29,7 @@ const StickerFace: React.FC<IEditorProps> = (props) => {
       style={props.style}
     >
       <FrameWindow
-        src={props.layers ? FRAME_ORIGIN : FRAME_ORIGIN + FRAME_PATH}
+        src={FRAME_ORIGIN}
         layers={props.layers}
         size={props.size}
         visible={visible}
@@ -60,4 +42,36 @@ const StickerFace: React.FC<IEditorProps> = (props) => {
   )
 }
 
-export { TransportContextProvider, StickerFace }
+
+interface IAvatarProps {
+  layer: string
+  noBackground: boolean
+}
+
+/*
+  <div id="render-canvas-container"></div>
+  <div id="render-continer"></div>
+  <script type="text/javascript" src="https://stickerface.io/api/init-min.js"></script>
+  <script type="text/javascript" src="https://stickerface.io/js/render.js"></script>
+*/
+
+const StickerFaceAvatar: React.FC<IAvatarProps> = (props) => {
+  const layersSvg = useRenderLayers(props.layer, RENDER_EXTENSION.SVG, props.noBackground)
+
+  return (
+    <div>
+      <img
+        src={layersSvg}
+        width="100%"
+        height="100%"
+        alt=""
+      />
+    </div>
+  )
+}
+
+export {
+  TransportContextProvider,
+  StickerFaceEditor,
+  StickerFaceAvatar,
+}
