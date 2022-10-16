@@ -56,6 +56,8 @@ const App = () => {
 export default App
 ```
 
+![Screenshot 2022-10-17 at 00 37 59](https://user-images.githubusercontent.com/50780255/196059525-746aa21f-6351-483f-a258-18e5f034b739.png)
+
 ### Params StickerFaceEditor
 
 * layers: string | null
