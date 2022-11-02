@@ -44,19 +44,12 @@ const StickerFaceEditor: React.FC<IEditorProps> = (props) => {
 
 
 interface IAvatarProps {
-  layer: string
-  noBackground: boolean
+  layers: string
+  noBackground?: boolean
 }
 
-/*
-  <div id="render-canvas-container"></div>
-  <div id="render-continer"></div>
-  <script type="text/javascript" src="https://stickerface.io/api/init-min.js"></script>
-  <script type="text/javascript" src="https://stickerface.io/js/render.js"></script>
-*/
-
 const StickerFaceAvatar: React.FC<IAvatarProps> = (props) => {
-  const layersSvg = useRenderLayers(props.layer, RENDER_EXTENSION.SVG, props.noBackground)
+  const layersSvg = useRenderLayers(props.layers, RENDER_EXTENSION.SVG, props?.noBackground || false)
 
   return (
     <div>

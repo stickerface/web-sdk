@@ -60,26 +60,68 @@ export default App
 
 ### Params StickerFaceEditor
 
-* layers: string | null
-* size: { width: string, height: string }
-* onInit: () => void
+`layers: string | null`
+
+`size: { width: string, height: string }`
+
+`onInit: () => void`
 ```tsx
 onInit={() => {
   console.log('On init')
 }}
 ```
-* onChange: (layers: string) => void
+`onChange: (layers: string) => void`
 ```tsx
 onChange={(layers) => {
   // @ts-ignore
   setLayers(layers?.data?.data)
 }}
 ```
-* config: IConfig
+`config: IConfig`
 ```tsx
 interface IConfig {
   excludedSections?: string | undefined
   selectedSections?: string | undefined
+}
+```
+
+### StickerFaceAvatar
+
+>Add 4 blocks to the top part inside the body
+
+```html
+<body>
+  <div id="render-canvas-container"></div>
+  <div id="render-continer"></div>
+  <script type="text/javascript" src="https://stickerface.io/api/init-min.js"></script>
+  <script type="text/javascript" src="https://stickerface.io/js/render.js"></script>
+...
+```
+
+```tsx
+import React from 'react'
+
+import { StickerFaceAvatar } from 'stickerface-sdk'
+
+const App = () => {
+  const layers = '1;83;73;3412;100;6;219;214;203;7;11;28;68;13;320;2;273;159;160';
+  
+  return (
+    <div className={'container'}>
+      <StickerFaceAvatar layers={layers} noBackground={false} />
+    </div>
+  )
+}
+
+export default App
+```
+
+### Params StickerFaceAvatar
+
+```tsx
+interface IAvatarProps {
+  layers: string
+  noBackground?: boolean
 }
 ```
 
