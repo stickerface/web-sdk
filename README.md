@@ -86,6 +86,7 @@ interface IConfig {
 ```
 
 ### StickerFaceAvatar
+![Screenshot 2022-11-02 at 16 15 01](https://user-images.githubusercontent.com/50780255/199502355-1e534143-6253-4bce-9598-cba792837610.png)
 
 >Add 4 blocks to the top part inside the body
 
