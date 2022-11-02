@@ -43,9 +43,9 @@ const App = () => {
           onInit={() => {
             console.log('On init')
           }}
-          onChange={(layers) => {
-            // @ts-ignore
-            setLayers(layers?.data?.data)
+          showButtonSaveAvatar
+          onSave={(layers) => {
+            setLayers(layers)
           }}
         />
       </TransportContextProvider>
@@ -60,6 +60,8 @@ export default App
 
 ### Params StickerFaceEditor
 
+`showButtonSaveAvatar?: boolean`
+
 `layers: string | null`
 
 `size: { width: string, height: string }`
@@ -70,6 +72,8 @@ onInit={() => {
   console.log('On init')
 }}
 ```
+>Use ```onChange``` when showButtonSaveAvatar = false
+
 `onChange: (layers: string) => void`
 ```tsx
 onChange={(layers) => {
@@ -77,11 +81,21 @@ onChange={(layers) => {
   setLayers(layers?.data?.data)
 }}
 ```
+
+>Use `onSave` when showButtonSaveAvatar = true
+
+`onSave?: (layers: string) => void`
+```tsx
+onSave={(layers) => {
+  setLayers(layers)
+}}
+```
+
 `config: IConfig`
 ```tsx
 interface IConfig {
-  excludedSections?: string | undefined
-  selectedSections?: string | undefined
+  excludedSections?: string
+  selectedSections?: string
 }
 ```
 

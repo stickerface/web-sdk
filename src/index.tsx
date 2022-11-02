@@ -15,18 +15,27 @@ const StickerFaceEditor: React.FC<IEditorProps> = (props) => {
   const [visible, setIsVisible] = useState<boolean>(false)
   const frameRef = useRef<HTMLIFrameElement>(null)
   const [isLoaded, setIsLoaded] = useState(false)
+  const [layers, onChange] = useState('')
+
+  const changeLayersOnSave = props?.showButtonSaveAvatar ? onChange : props.onChange ? props?.onChange : onChange
+
+  const handleSave = () => {
+    if (props.onSave) {
+      // @ts-ignore
+      props.onSave(layers?.data?.data)
+    }
+  }
 
   setupListeners({
     isLoaded,
     onInit: props.onInit,
-    onChange: props.onChange,
+    onChange: changeLayersOnSave,
     frame: frameRef
   })
 
   return (
     <div
       className={classNames(styles.StickerFaceContainer, props.className)}
-      style={props.style}
     >
       <FrameWindow
         src={FRAME_ORIGIN}
@@ -38,6 +47,14 @@ const StickerFaceEditor: React.FC<IEditorProps> = (props) => {
         setVisible={(visible) => setIsVisible(visible)}
         config={props.config}
       />
+
+      {
+        (props?.showButtonSaveAvatar && isLoaded) && (
+          <button className={styles.StickerFaceButton} onClick={handleSave}>
+            Save Avatar
+          </button>
+        )
+      }
     </div>
   )
 }

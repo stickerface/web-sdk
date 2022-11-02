@@ -1,8 +1,6 @@
-import { CSSProperties } from 'react'
-
 export interface IConfig {
-  excludedSections?: string | undefined
-  selectedSections?: string | undefined
+  excludedSections?: string
+  selectedSections?: string
 }
 
 export interface EditorConfig {
@@ -16,7 +14,8 @@ export interface EditorConfig {
 
 export interface IEditorProps extends EditorConfig {
   onInit: () => void
-  onChange: (layers: string) => void
-  style?: CSSProperties
   className?: string
+  showButtonSaveAvatar?: boolean
+  onSave?: (layers: string) => void
+  onChange?: (layers: string) => void
 }
