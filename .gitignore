@@ -41,3 +41,5 @@ yarn-error.log*
 
 .idea
 lang.csv
+yarn.lock
+example/yarn.lock
