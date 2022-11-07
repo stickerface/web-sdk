@@ -4,7 +4,6 @@
 .StickerFaceFrame {
   border: none;
   background-color: transparent;
-  border-radius: 16px;
   top: 0;
   right: 0;
   z-index: 100;
@@ -14,7 +13,6 @@
 .StickerFaceContainer {
   position: relative;
   height: 100%;
-  border-radius: 16px;
   border: none;
   display: flex;
   flex-direction: column;
@@ -25,13 +23,14 @@
   font-family: Montserrat, serif;
   font-style: normal;
   font-weight: 700;
-  font-size: 18px;
+  font-size: 20px;
+  line-height: 24px;
   cursor: pointer;
 
-  width: 100%;
   border: none;
   border-radius: 12px;
-  height: 56px;
+  margin: 0 16px 16px 16px;
+  height: 64px;
   padding: 18px 64px;
   background: #42AAF0;
   color: white;
@@ -40,5 +39,9 @@
 }
 
 .StickerFaceButton:active {
+  background: #128FE3;
+}
+
+.StickerFaceButton:hover {
   background: #128FE3;
 }
