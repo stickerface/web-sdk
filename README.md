@@ -6,6 +6,7 @@
 
 ## Install
 
+
 ### npm
 ```bash
 npm install --save stickerface-sdk
