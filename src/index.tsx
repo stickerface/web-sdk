@@ -12,6 +12,7 @@ import { RENDER_EXTENSION, useRenderLayers } from "./hooks/useLayersRender";
 const FRAME_ORIGIN = 'https://editor.stickerface.io'
 
 const StickerFaceEditor: React.FC<IEditorProps> = (props) => {
+  const { dataConnect } = props
   const [visible, setIsVisible] = useState<boolean>(false)
   const frameRef = useRef<HTMLIFrameElement>(null)
   const [isLoaded, setIsLoaded] = useState(false)
@@ -24,6 +25,14 @@ const StickerFaceEditor: React.FC<IEditorProps> = (props) => {
       // @ts-ignore
       props.onSave(layers?.data?.data)
     }
+  }
+
+  const getWalletStr = () => {
+    const wallet = dataConnect?.wallet || ''
+    const network = dataConnect?.network || ''
+
+    if ((wallet === '') || (network === '')) return '';
+    return `wallet=${wallet}&network=${network}`
   }
 
   setupListeners({
@@ -46,6 +55,7 @@ const StickerFaceEditor: React.FC<IEditorProps> = (props) => {
         setLoad={(loaded) => setIsLoaded(loaded)}
         setVisible={(visible) => setIsVisible(visible)}
         config={props.config}
+        dataWalletStr={getWalletStr()}
       />
 
       {

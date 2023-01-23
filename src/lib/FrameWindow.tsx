@@ -36,13 +36,16 @@ export const FrameWindow: React.FC<IFrameWindowProps> = React.memo(
     }, [])
 
     const editorConfigUrl = `?${srcParams?.selectedSections || ''}${srcParams?.excludedSections || ''}&layers=${props?.layers || DEFAULT_LAYERS}`
+    const ediotrCongigUrlWithWallet = props.dataWalletStr !== '' 
+    ? `${editorConfigUrl}&${props.dataWalletStr}` 
+    : editorConfigUrl
 
     return (
       <iframe
         className={styles.StickerFaceFrame}
         width={props.size.width}
         height={props.size.height}
-        src={props.src + editorConfigUrl}
+        src={props.src + ediotrCongigUrlWithWallet}
         ref={props.frameRef}
         onLoad={() => props.setLoad(true)}
       />

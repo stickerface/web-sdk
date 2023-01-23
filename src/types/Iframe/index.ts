@@ -7,4 +7,5 @@ export interface IFrameWindowProps extends EditorConfig {
   setLoad: (loaded: boolean) => void
   frameRef: RefObject<HTMLIFrameElement>
   src: string
+  dataWalletStr: string
 }

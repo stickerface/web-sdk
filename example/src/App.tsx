@@ -23,6 +23,10 @@ const App = () => {
           onSave={(layers) => {
             setLayers(layers)
           }}
+          dataConnect={{
+            wallet: 'kQDTPT-6EJbwdTjOKXc1zuOJ7AC28wHgmVcvrRvLCAsQqVc5',
+            network: 'testnet',
+          }}
         />
       </TransportContextProvider>
     </div>

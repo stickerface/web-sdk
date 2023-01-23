@@ -18,4 +18,8 @@ export interface IEditorProps extends EditorConfig {
   showButtonSaveAvatar?: boolean
   onSave?: (layers: string) => void
   onChange?: (layers: string) => void
+  dataConnect?: {
+    wallet: string
+    network: 'mainnet' | 'testnet'
+  }
 }
