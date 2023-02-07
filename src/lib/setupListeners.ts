@@ -3,7 +3,7 @@ import { RefObject, useEffect } from 'react'
 import { useTransport } from './Transport/Transport'
 
 interface IListenerProps {
-  onInit: () => void
+  onInit?: () => void
   onChange: (layers: string) => void
   isLoaded: boolean
   frame: RefObject<HTMLIFrameElement>
@@ -14,16 +14,14 @@ export const setupListeners = (props: IListenerProps) => {
   const { controller } = useTransport()
 
   useEffect(() => {
-    console.log(frame.current !== null && isLoaded, controller)
-
     if (frame.current !== null && isLoaded) {
       controller?.unsubscribeAll()
       controller?.setFrame(frame.current.contentWindow)
-
-      controller?.addEventListener('iframe_init', props.onInit)
       controller?.addEventListener('layers_change', props.onChange)
-
-      controller?.onInit()
+      if (props?.onInit) {
+        controller?.addEventListener('iframe_init', props.onInit)
+        controller?.onInit()
+      }
     }
   }, [frame.current, isLoaded])
 }

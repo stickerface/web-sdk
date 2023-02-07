@@ -11,14 +11,20 @@ export const useTransport = () => {
   return transport
 }
 
-export const TransportContextProvider: React.FC = (props) => {
+interface ITransportContextProvider {
+  children: JSX.Element | HTMLElement
+}
+
+export const TransportContextProvider: React.FC<ITransportContextProvider> = ({
+  children
+}) => {
   const controller = React.useMemo(() => {
     return new FrameController()
   }, [])
 
   return (
     <TransportContext.Provider value={{ controller }}>
-      {props.children}
+      {children}
     </TransportContext.Provider>
   )
 }

@@ -3,10 +3,9 @@ import styles from "./styles.module.css";
 import * as React from "react";
 import { useRef, useState } from "react";
 import { IEditorProps } from "./types/Editor";
-import { FrameWindow } from "./lib/FrameWindow";
+import { DEFAULT_LAYERS, FrameWindow } from "./lib/FrameWindow";
 import { setupListeners } from "./lib/setupListeners";
 import { TransportContextProvider } from "./lib/Transport/Transport";
-import classNames from "classnames";
 import { RENDER_EXTENSION, useRenderLayers } from "./hooks/useLayersRender";
 
 const FRAME_ORIGIN = 'https://editor.stickerface.io'
@@ -18,12 +17,16 @@ const StickerFaceEditor: React.FC<IEditorProps> = (props) => {
   const [isLoaded, setIsLoaded] = useState(false)
   const [layers, onChange] = useState('')
 
-  const changeLayersOnSave = props?.showButtonSaveAvatar ? onChange : props.onChange ? props?.onChange : onChange
+  const changeLayersOnSave = props?.showButtonSaveAvatar
+    ? onChange
+    : props.onChange
+      ? props?.onChange
+      : onChange
 
   const handleSave = () => {
     if (props.onSave) {
       // @ts-ignore
-      props.onSave(layers?.data?.data)
+      props.onSave(layers?.data?.data || DEFAULT_LAYERS)
     }
   }
 
@@ -37,25 +40,22 @@ const StickerFaceEditor: React.FC<IEditorProps> = (props) => {
 
   setupListeners({
     isLoaded,
-    onInit: props.onInit,
     onChange: changeLayersOnSave,
     frame: frameRef
   })
 
   return (
-    <div
-      className={classNames(styles.StickerFaceContainer, props.className)}
-    >
+    <div className={styles.StickerFaceContainer}>
       <FrameWindow
         src={FRAME_ORIGIN}
         layers={props.layers}
-        size={props.size}
         visible={visible}
         frameRef={frameRef}
         setLoad={(loaded) => setIsLoaded(loaded)}
         setVisible={(visible) => setIsVisible(visible)}
         config={props.config}
         dataWalletStr={getWalletStr()}
+        className={props?.className}
       />
 
       {
@@ -73,6 +73,20 @@ const StickerFaceEditor: React.FC<IEditorProps> = (props) => {
 interface IAvatarProps {
   layers: string
   noBackground?: boolean
+  className?: string
+}
+
+const GetBlobAvatar = async (
+  layres: string | null,
+  nobg: boolean
+): Promise<null | Blob> => {
+  if (layres) {
+    const layersSvg = useRenderLayers(layres, RENDER_EXTENSION.SVG, nobg || false)
+    const file = await fetch(layersSvg).then(res => res.blob())
+    return file
+  }
+
+  return null
 }
 
 const StickerFaceAvatar: React.FC<IAvatarProps> = (props) => {
@@ -84,6 +98,7 @@ const StickerFaceAvatar: React.FC<IAvatarProps> = (props) => {
         src={layersSvg}
         width="100%"
         height="100%"
+        className={props?.className}
         alt=""
       />
     </div>
@@ -94,4 +109,5 @@ export {
   TransportContextProvider,
   StickerFaceEditor,
   StickerFaceAvatar,
+  GetBlobAvatar
 }

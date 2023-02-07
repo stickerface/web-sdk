@@ -5,8 +5,9 @@ import { handleClickOutside } from '../hooks'
 import styles from '../styles.module.css'
 import { IFrameWindowProps } from '../types/Iframe'
 import { IConfig } from '../types/Editor'
+import classNames from 'classnames'
 
-const DEFAULT_LAYERS = '1;69;159;253;250;13;160;100;3040;265;76;3000;273;3200;90;28;23;203;11;68;219;83;35;'
+export const DEFAULT_LAYERS = '1;69;159;253;250;13;160;100;3040;265;76;3000;273;3200;90;28;23;203;11;68;219;83;35;'
 
 export const FrameWindow: React.FC<IFrameWindowProps> = React.memo(
   (props) => {
@@ -42,9 +43,7 @@ export const FrameWindow: React.FC<IFrameWindowProps> = React.memo(
 
     return (
       <iframe
-        className={styles.StickerFaceFrame}
-        width={props.size.width}
-        height={props.size.height}
+        className={classNames(styles.StickerFaceFrame, props?.className)}
         src={props.src + ediotrCongigUrlWithWallet}
         ref={props.frameRef}
         onLoad={() => props.setLoad(true)}

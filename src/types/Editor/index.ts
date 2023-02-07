@@ -6,14 +6,10 @@ export interface IConfig {
 export interface EditorConfig {
   layers?: string | null
   config?: IConfig
-  size: {
-    width: string
-    height: string
-  }
 }
 
 export interface IEditorProps extends EditorConfig {
-  onInit: () => void
+  onInit?: () => void
   className?: string
   showButtonSaveAvatar?: boolean
   onSave?: (layers: string) => void

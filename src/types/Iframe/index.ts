@@ -8,4 +8,5 @@ export interface IFrameWindowProps extends EditorConfig {
   frameRef: RefObject<HTMLIFrameElement>
   src: string
   dataWalletStr: string
+  className?: string
 }
